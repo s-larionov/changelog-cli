@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.1.0] - 2024-01-29
+
 ### Changed
 - Replaced parser library due to performance issues [fast solution]
 
