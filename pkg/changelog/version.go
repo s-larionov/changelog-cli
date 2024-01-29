@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/Masterminds/semver"
-	"github.com/gomarkdown/markdown/ast"
+	"github.com/yuin/goldmark/ast"
 )
 
 const UnreleasedValue VersionString = "Unreleased"
@@ -72,7 +72,7 @@ func RequireVersionFromString(version VersionString, date *time.Time) Version {
 // - version
 //
 // The version should be supported by semver or be constant "Unrealized"
-func NewVersionFromNode(node ast.Node, requiredLevel int) (Version, error) {
+func NewVersionFromNode(src []byte, node ast.Node, requiredLevel int) (Version, error) {
 	h, ok := node.(*ast.Heading)
 	if !ok {
 		return Empty, ErrNotIsVersion
@@ -82,11 +82,7 @@ func NewVersionFromNode(node ast.Node, requiredLevel int) (Version, error) {
 		return Empty, ErrNotIsVersion
 	}
 
-	if len(h.GetChildren()) != 1 {
-		return Empty, ErrNotIsVersion
-	}
-
-	text := strings.TrimSpace(string(h.GetChildren()[0].AsLeaf().Literal))
+	text := strings.TrimSpace(string(h.Text(src)))
 
 	matches := re.FindAllStringSubmatch(text, 1)
 	if matches == nil {

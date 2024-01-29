@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gomarkdown/markdown/ast"
+	"github.com/yuin/goldmark/ast"
 )
 
 const (
@@ -48,7 +48,7 @@ type ChangesKind string
 
 type ChangesMajority uint
 
-func NewChangesKindFromNode(node ast.Node, requiredLevel int) (ChangesKind, error) {
+func NewChangesKindFromNode(src []byte, node ast.Node, requiredLevel int) (ChangesKind, error) {
 	h, ok := node.(*ast.Heading)
 	if !ok {
 		return "", ErrNotIsChangesKind
@@ -58,12 +58,7 @@ func NewChangesKindFromNode(node ast.Node, requiredLevel int) (ChangesKind, erro
 		return "", ErrNotIsChangesKind
 	}
 
-	if len(h.GetChildren()) != 1 {
-		return "", ErrNotIsChangesKind
-	}
-
-	text := strings.TrimSpace(string(h.GetChildren()[0].AsLeaf().Literal))
-
+	text := strings.TrimSpace(string(h.Text(src)))
 	if text == "" {
 		return "", ErrNotIsChangesKind
 	}

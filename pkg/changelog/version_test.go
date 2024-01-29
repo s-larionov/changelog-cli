@@ -3,9 +3,9 @@ package changelog
 import (
 	"testing"
 
-	"github.com/gomarkdown/markdown"
-	"github.com/gomarkdown/markdown/parser"
 	"github.com/smartystreets/goconvey/convey"
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/text"
 )
 
 func TestNewFromNode(t *testing.T) {
@@ -19,10 +19,12 @@ func TestNewFromNode(t *testing.T) {
 	}
 
 	for _, v := range versions {
-		node := markdown.Parse([]byte(v[0]), parser.New()).GetChildren()[0]
+		src := []byte(v[0])
 
-		convey.Convey(v[0], t, func() {
-			ver, err := NewVersionFromNode(node, 2)
+		node := goldmark.DefaultParser().Parse(text.NewReader(src))
+
+		convey.Convey(string(src), t, func() {
+			ver, err := NewVersionFromNode(src, node.FirstChild(), 2)
 
 			convey.So(err, convey.ShouldBeNil)
 			convey.So(ver.IsValid(), convey.ShouldBeTrue)

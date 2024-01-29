@@ -1,11 +1,12 @@
 module gitlab.com/3line-io/infrastructure/changelog-cli
 
-go 1.18
+go 1.21
 
 require (
 	github.com/Masterminds/semver v1.5.0
 	github.com/gomarkdown/markdown v0.0.0-20220607163217-45f7c050e2d1
 	github.com/smartystreets/goconvey v1.7.2
+	github.com/yuin/goldmark v1.6.0
 )
 
 require (
