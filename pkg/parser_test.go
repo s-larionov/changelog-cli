@@ -5,7 +5,7 @@ import (
 
 	"github.com/smartystreets/goconvey/convey"
 
-	"gitlab.com/3line-io/infrastructure/changelog-cli/pkg/changelog"
+	"github.com/s-larionov/changelog-cli/pkg/changelog"
 )
 
 func TestParseMarkdownFile(t *testing.T) {

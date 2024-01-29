@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"gitlab.com/3line-io/infrastructure/changelog-cli/pkg"
-	"gitlab.com/3line-io/infrastructure/changelog-cli/pkg/changelog"
+	"github.com/s-larionov/changelog-cli/pkg"
+	"github.com/s-larionov/changelog-cli/pkg/changelog"
 )
 
 const (
