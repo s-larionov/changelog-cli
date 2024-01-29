@@ -1,0 +1,6 @@
+.git/
+.idea/
+changelog-cli
+.DS_Store
+/bin/
+/.env
