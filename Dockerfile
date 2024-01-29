@@ -28,6 +28,6 @@ RUN apk update && \
 RUN echo "Europe/Moscow" >  /etc/timezone && cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 
 WORKDIR /opt
-COPY . /opt
+COPY --from=builder /opt/changelog-cli /opt/changelog-cli
 
 CMD ["sh", "-c", "./changelog-cli -command=${COMMAND} -file=${FILE} -from=${FROM} -to=${TO} -bump=${BUMP} -version=${VERSION}"]
